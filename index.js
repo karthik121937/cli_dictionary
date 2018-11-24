@@ -3,22 +3,21 @@
 const program = require('commander');
 const oxfordApi = require('./oxford_api');
 const chalk = require('chalk');
-var wordArray = ["mobile","remote","bottle","book","pillow","rubber","chocolate","robot","bed","ace","spectacles","light","ship","possessive","umbrella","rainbow","sex","snake","purse","laptop"];
-var randomNumber = Math.floor(Math.random()*wordArray.length);
+var wordArray = ["mobile", "remote", "bottle", "book", "pillow", "rubber", "chocolate", "robot", "bed", "ace", "spectacles", "light", "ship", "possessive", "umbrella", "rainbow", "sex", "snake", "purse", "laptop"];
+var randomNumber = Math.floor(Math.random() * wordArray.length);
 var wordofday = wordArray[randomNumber];
 
 if (process.argv.length == 2) {
-    console.log('Word of the day "%s"',chalk.black.bold(wordofday))
+    console.log('Word of the day "%s"', chalk.black.bold(wordofday.toUpperCase()))
     oxfordApi.wordDefinition(wordofday)
     oxfordApi.synonyms(wordofday)
     oxfordApi.Antonyms(wordofday)
     oxfordApi.examples(wordofday)
-}else {
-    if(process.argv.length > 2){
-        program.arguments('command', 'word').action(async(command, word) => {
+} else {
+    if (process.argv.length > 2) {
+        program.arguments('command', 'word').action(async (command, word) => {
             switch (command) {
-                case "def":
-                {
+                case "def": {
                     if (word && typeof word == 'string') {
                         // console.log('\nGetting "Definition" of the word: "%s"', word);
                         oxfordApi.wordDefinition(word);
@@ -27,8 +26,7 @@ if (process.argv.length == 2) {
                     }
                     break;
                 }
-                case "syn":
-                {
+                case "syn": {
                     if (word && typeof word == 'string') {
                         // console.log('\nGetting "Synonyms" of the word: "%s" \n', word);
                         oxfordApi.synonyms(word);
@@ -37,8 +35,7 @@ if (process.argv.length == 2) {
                     }
                     break;
                 }
-                case "ant":
-                {
+                case "ant": {
                     if (word && typeof word == 'string') {
                         // console.log('\nGetting "Antonyms" of the word: "%s" \n', word);
                         oxfordApi.Antonyms(word);
@@ -47,8 +44,7 @@ if (process.argv.length == 2) {
                     }
                     break;
                 }
-                case "ex":
-                {
+                case "ex": {
                     if (word && typeof word == 'string') {
                         // console.log('\nGetting "Example" of the word: "%s" \n', word);
                         oxfordApi.examples(word);
@@ -57,8 +53,7 @@ if (process.argv.length == 2) {
                     }
                     break;
                 }
-                case "dict":
-                {
+                case "dict": {
                     if (word && typeof word == 'string') {
                         console.log('\nGetting "Details" of the word: "%s"', chalk.green.bold(word));
                         oxfordApi.wordDefinition(word)
@@ -70,15 +65,13 @@ if (process.argv.length == 2) {
                     }
                     break;
                 }
-                case "play":
-                {
+                case "play": {
                     oxfordApi.play(wordofday);
                 }
-                default:
-                {
+                default: {
                     if (typeof word == 'object')
                         var word = command;
-                    if(word && typeof word == 'string' && word === "play")
+                    if (word && typeof word == 'string' && word === "play")
                         break;
                     if (word && typeof word == 'string') {
                         console.log('\nGetting "Details" of the word : "%s". \n', chalk.green.bold(word));
