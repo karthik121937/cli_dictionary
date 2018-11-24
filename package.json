@@ -1,0 +1,30 @@
+{
+  "name": "cli_dictionary",
+  "version": "1.0.0",
+  "description": "This is cli dictionary using oxford",
+  "main": "index.js",
+  "scripts": {
+    "test": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karthik121937/cli_dictionary.git"
+  },
+  "entry point": "index.js",
+  "author": "karthik vankara",
+  "license": "ISC",
+  "bin": {
+    "dict": "./index.js"
+  },
+  "dependencies": {
+    "co": "^4.6.0",
+    "co-prompt": "^1.0.0",
+    "commander": "^2.15.0",
+    "oxford-dictionary-api": "^1.0.1",
+    "request": "^2.85.0"
+  },
+  "bugs": {
+    "url": "https://github.com/karthik121937/cli_dictionary/issues"
+  },
+  "homepage": "https://github.com/karthik121937/cli_dictionary#readme"
+}
