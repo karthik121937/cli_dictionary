@@ -16,5 +16,5 @@ WordOfTheDay:
   dict
 WordFullDictionary:
   dict <your word> (or) dict dict <your word>
-Play
+Game:
   dict play
