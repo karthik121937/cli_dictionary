@@ -3,7 +3,7 @@
 const program = require('commander');
 const oxfordApi = require('./oxford_api');
 
-var wordArray = ["bottle","ace","light","ship","possessive","umbrella","rainbow","sex","snake","purse","laptop"];
+var wordArray = ["mobile","remote","bottle","book","pillow","rubber","chocolate","robot","bed","ace","spectacles","light","ship","possessive","umbrella","rainbow","sex","snake","purse","laptop"];
 var randomNumber = Math.floor(Math.random()*wordArray.length);
 var wordofday = wordArray[randomNumber];
 
