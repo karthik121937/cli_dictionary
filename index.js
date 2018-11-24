@@ -3,10 +3,11 @@
 const program = require('commander');
 const oxfordApi = require('./oxford_api');
 
+var wordArray = ["bottle","ace","light","ship","possessive","umbrella","rainbow","sex","snake","purse"];
+var randomNumber = Math.floor(Math.random()*wordArray.length);
+var wordofday = wordArray[randomNumber];
+
 if (process.argv.length == 2) {
-    var wordArray = ["bottle","ace","light","ship","possessive","umbrella","rainbow","sex","snake","purse"];
-    var randomNumber = Math.floor(Math.random()*wordArray.length);
-    var wordofday = wordArray[randomNumber];
     console.log('Word of the day "%s"',wordofday)
     oxfordApi.wordDefinition(wordofday)
     oxfordApi.synonyms(wordofday)
@@ -69,21 +70,25 @@ if (process.argv.length == 2) {
                     }
                     break;
                 }
-                default:
+                case "play":
                 {
-                    if (typeof word == 'object')
-                        var word = command;
-                    if (word && typeof word == 'string') {
-                        console.log('\nGetting "Details" of the word : "%s". \n', word);
-                        oxfordApi.wordDefinition(word);
-                        oxfordApi.synonyms(word);
-                        oxfordApi.Antonyms(word);
-                        oxfordApi.examples(word);
-                    } else {
-                        console.log('Please enter valid word \n');
-                    }
-                    break;
+                    oxfordApi.play(wordofday);
                 }
+                // default:
+                // {
+                //     if (typeof word == 'object')
+                //         var word = command;
+                //     if (word && typeof word == 'string') {
+                //         console.log('\nGetting "Details" of the word : "%s". \n', word);
+                //         oxfordApi.wordDefinition(word);
+                //         oxfordApi.synonyms(word);
+                //         oxfordApi.Antonyms(word);
+                //         oxfordApi.examples(word);
+                //     } else {
+                //         console.log('Please enter valid word \n');
+                //     }
+                //     break;
+                // }
             }
         }).parse(process.argv);
     }
