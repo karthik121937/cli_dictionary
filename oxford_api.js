@@ -10,7 +10,6 @@ var options;
 
 module.exports = {
     wordDefinition: function(word){
-        console.log("cam in defff")
         options = {
             url: "https://od-api.oxforddictionaries.com/api/v1/entries/en/"+word,
             headers: headers
@@ -22,6 +21,7 @@ module.exports = {
                 if(body.results && body.results.length && body.results[0].lexicalEntries && body.results[0].lexicalEntries.length && body.results[0].lexicalEntries[0].entries && body.results[0].lexicalEntries[0].entries.length){
                     if(body.results[0].lexicalEntries[0].entries[0].senses && body.results[0].lexicalEntries[0].entries[0].senses.length){
                         var senses = body.results[0].lexicalEntries[0].entries[0].senses;
+                        console.log('\n "Definition" of the word: "%s"', word);
                         senses.forEach(function(each){
                             each.definitions.forEach(function(each1){
                                 console.log(each1)
@@ -32,7 +32,7 @@ module.exports = {
                 }
 
             }else{
-                console.log(response.statusCode)
+                console.log('"Definition" Not Found for',word,response.statusCode)
             }
         }
 
@@ -50,6 +50,7 @@ module.exports = {
                 if(body.results && body.results.length && body.results[0].lexicalEntries && body.results[0].lexicalEntries.length && body.results[0].lexicalEntries[0].entries && body.results[0].lexicalEntries[0].entries.length){
                     if(body.results[0].lexicalEntries[0].entries[0].senses && body.results[0].lexicalEntries[0].entries[0].senses.length){
                         var senses = body.results[0].lexicalEntries[0].entries[0].senses;
+                        console.log('\n "Synonyms" of the word: "%s"', word);
                         senses.forEach(function(each){
                             each.synonyms.forEach(function(each1){
                                 synary +=each1.id+', '
@@ -60,14 +61,13 @@ module.exports = {
                 }
 
             }else{
-                console.log("Error code:"+response.statusCode)
+                console.log('"synonyms" Not Found for',word,response.statusCode)
             }
         }
 
         request(options, callback);
     },
     Antonyms:function(word){
-        console.log("came in antonyms")
         options = {
             url: "https://od-api.oxforddictionaries.com/api/v1/entries/en/"+word+"/antonyms",
             headers: headers
@@ -80,9 +80,9 @@ module.exports = {
                 if(body.results && body.results.length && body.results[0].lexicalEntries && body.results[0].lexicalEntries.length && body.results[0].lexicalEntries[0].entries && body.results[0].lexicalEntries[0].entries.length){
                     if(body.results[0].lexicalEntries[0].entries[0].senses && body.results[0].lexicalEntries[0].entries[0].senses.length){
                         var senses = body.results[0].lexicalEntries[0].entries[0].senses;
+                        console.log('\n "Antonyms" of the word: "%s"', word);
                         senses.forEach(function(each){
                             each.antonyms.forEach(function(each1){
-                                console.log("---",each1.id)
                                 synary +=each1.id+', '
                             })
                         })
@@ -92,7 +92,7 @@ module.exports = {
 
                 //   console.log(body);
             }else{
-                console.log("Error code:"+response.statusCode)
+                console.log('"Antonyms" Not Found for',word,response.statusCode)
             }
         }
 
@@ -111,24 +111,29 @@ module.exports = {
                 if(body.results && body.results.length && body.results[0].lexicalEntries && body.results[0].lexicalEntries.length && body.results[0].lexicalEntries[0].entries && body.results[0].lexicalEntries[0].entries.length){
                     if(body.results[0].lexicalEntries[0].entries[0].senses && body.results[0].lexicalEntries[0].entries[0].senses.length){
                         var senses = body.results[0].lexicalEntries[0].entries[0].senses;
+                        console.log('\n "Example" of the word: "%s"', word);
+
                         senses.forEach(function(each){
-                            each.examples.forEach(function(each1){
-                                console.log(each1.text)
-                                //   synary.push(each1.text)
-                            })
+                            if(each.examples && each.examples.length){
+                                each.examples.forEach(function(each1){
+                                    console.log(each1.text)
+                                    //   synary.push(each1.text)
+                                })
+                            }else{
+                                // console.log("Examples Not Found for",word)
+
+                            }
+
                         })
                     }
                 }
 
                 //   console.log(body);
             }else{
-                console.log("Error code:"+response.statusCode)
+                console.log('"Examples" Not Found for :',word,'',response.statusCode)
             }
         }
 
         request(options, callback);
-    },
-    wordOfTheDay:function () {
-        console.log("word of the test");
     }
 };
