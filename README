@@ -1,1 +1,20 @@
-This is cli dictionary using oxford
+This is CLI dictionary using oxford
+
+Before Starting:
+run 'sudo npm install -g'
+
+Commands for running this dictionay are
+Definition:
+  dict def <your word>
+Antonyms:
+  dict ant <your word>
+Synonyms:
+  dict syn <your word>
+Examples:
+  dict ex <your word>
+WordOfTheDay:
+  dict
+WordFullDictionary:
+  dict <your word> (or) dict dict <your word>
+Play
+  dict play
