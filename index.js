@@ -3,7 +3,7 @@
 const program = require('commander');
 const oxfordApi = require('./oxford_api');
 
-var wordArray = ["bottle","ace","light","ship","possessive","umbrella","rainbow","sex","snake","purse"];
+var wordArray = ["bottle","ace","light","ship","possessive","umbrella","rainbow","sex","snake","purse","laptop"];
 var randomNumber = Math.floor(Math.random()*wordArray.length);
 var wordofday = wordArray[randomNumber];
 
@@ -74,24 +74,24 @@ if (process.argv.length == 2) {
                 {
                     oxfordApi.play(wordofday);
                 }
-                // default:
-                // {
-                //     if (typeof word == 'object')
-                //         var word = command;
-                //     if (word && typeof word == 'string') {
-                //         console.log('\nGetting "Details" of the word : "%s". \n', word);
-                //         oxfordApi.wordDefinition(word);
-                //         oxfordApi.synonyms(word);
-                //         oxfordApi.Antonyms(word);
-                //         oxfordApi.examples(word);
-                //     } else {
-                //         console.log('Please enter valid word \n');
-                //     }
-                //     break;
-                // }
+                default:
+                {
+                    if (typeof word == 'object')
+                        var word = command;
+                    if(word && typeof word == 'string' && word === "play")
+                        break;
+                    if (word && typeof word == 'string') {
+                        console.log('\nGetting "Details" of the word : "%s". \n', word);
+                        oxfordApi.wordDefinition(word);
+                        oxfordApi.synonyms(word);
+                        oxfordApi.Antonyms(word);
+                        oxfordApi.examples(word);
+                    } else {
+                        console.log('Please enter valid word \n');
+                    }
+                    break;
+                }
             }
         }).parse(process.argv);
     }
 }
-
-
