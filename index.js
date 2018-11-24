@@ -2,13 +2,13 @@
 
 const program = require('commander');
 const oxfordApi = require('./oxford_api');
-
+const chalk = require('chalk');
 var wordArray = ["mobile","remote","bottle","book","pillow","rubber","chocolate","robot","bed","ace","spectacles","light","ship","possessive","umbrella","rainbow","sex","snake","purse","laptop"];
 var randomNumber = Math.floor(Math.random()*wordArray.length);
 var wordofday = wordArray[randomNumber];
 
 if (process.argv.length == 2) {
-    console.log('Word of the day "%s"',wordofday)
+    console.log('Word of the day "%s"',chalk.black.bold(wordofday))
     oxfordApi.wordDefinition(wordofday)
     oxfordApi.synonyms(wordofday)
     oxfordApi.Antonyms(wordofday)
@@ -60,7 +60,7 @@ if (process.argv.length == 2) {
                 case "dict":
                 {
                     if (word && typeof word == 'string') {
-                        console.log('\nGetting "Details" of the word: "%s"', word);
+                        console.log('\nGetting "Details" of the word: "%s"', chalk.green.bold(word));
                         oxfordApi.wordDefinition(word)
                         oxfordApi.synonyms(word)
                         oxfordApi.Antonyms(word)
@@ -81,7 +81,7 @@ if (process.argv.length == 2) {
                     if(word && typeof word == 'string' && word === "play")
                         break;
                     if (word && typeof word == 'string') {
-                        console.log('\nGetting "Details" of the word : "%s". \n', word);
+                        console.log('\nGetting "Details" of the word : "%s". \n', chalk.green.bold(word));
                         oxfordApi.wordDefinition(word);
                         oxfordApi.synonyms(word);
                         oxfordApi.Antonyms(word);
